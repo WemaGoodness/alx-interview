@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """
-This module contains the function `can_unlock_all` which determines
+This module contains the function `canUnlockall` which determines
 if all boxes can be unlocked given a list of lists where each list
 represents a box and contains keys to other boxes.
 """
 
-def can_unlock_all(boxes):
+def canUnlockAll(boxes):
     """
     Determines if all the boxes can be opened.
 
