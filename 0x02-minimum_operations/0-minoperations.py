@@ -8,7 +8,7 @@ H characters in a text file
 def minOperations(n: int) -> int:
     """
     Calculates the fewest number of operations needed to result in exactly `n`
-    H characters.
+    H characters in the file.
     :param n: int, number of H characters required
     :return: int, minimum number of operations required to achieve `n`
     H characters
@@ -17,7 +17,9 @@ def minOperations(n: int) -> int:
         return 0
 
     operations = 0
+
     factor = 2
+
     while n > 1:
         while n % factor == 0:
             operations += factor
@@ -30,7 +32,7 @@ def minOperations(n: int) -> int:
 # Testing
 if __name__ == "__main__":
     n = 4
-    print("Min # of oper to reach {} char: {}".format(n, minOperations(n)))
+    print("Min number of operations to reach {} characters: {}".format(n, minOperations(n)))
 
     n = 12
-    print("Min # of oper to reach {} char: {}".format(n, minOperations(n)))
+    print("Min number of operations to reach {} characters: {}".format(n, minOperations(n)))
