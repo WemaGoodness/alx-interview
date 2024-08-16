@@ -18,7 +18,10 @@ status_code_counts = {
 line_count = 0
 
 # Regex pattern to validate and extract data from log lines
-log_pattern = re.compile(r'^(\S+) - \[(.*?)\] "GET /projects/260 HTTP/1.1" (\d{3}) (\d+)$')
+log_pattern = re.compile(
+    r'^(\S+) - \[(.*?)\] "GET /projects/260 HTTP/1.1" (\d{3}) (\d+)$'
+)
+
 
 def print_metrics():
     """Prints the accumulated metrics."""
@@ -27,10 +30,12 @@ def print_metrics():
         if status_code_counts[code] > 0:
             print(f"{code}: {status_code_counts[code]}")
 
+
 def signal_handler(sig, frame):
     """Handles the keyboard interrupt signal to print metrics."""
     print_metrics()
     sys.exit(0)
+
 
 # Set up signal handler for keyboard interrupt (CTRL + C)
 signal.signal(signal.SIGINT, signal_handler)
