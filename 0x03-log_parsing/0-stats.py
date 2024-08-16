@@ -2,7 +2,8 @@
 """
 Log parsing script that reads from stdin and computes metrics.
 - It outputs total file size and count of specific status codes every 10 lines.
-- On a keyboard interrupt, it prints the computed metrics.
+- On a keyboard interrupt, it prints the computed metrics and raises the
+exception.
 """
 
 import sys
@@ -34,29 +35,33 @@ def print_metrics():
 def signal_handler(sig, frame):
     """Handles the keyboard interrupt signal to print metrics."""
     print_metrics()
-    sys.exit(0)
+    raise KeyboardInterrupt
 
 
 # Set up signal handler for keyboard interrupt (CTRL + C)
 signal.signal(signal.SIGINT, signal_handler)
 
-# Reading from stdin
-for line in sys.stdin:
-    line_count += 1
+try:
+    # Reading from stdin
+    for line in sys.stdin:
+        line_count += 1
 
-    # Match the line with the log pattern
-    match = log_pattern.match(line.strip())
-    if match:
-        ip, date, status_code, file_size = match.groups()
-        total_file_size += int(file_size)
+        # Match the line with the log pattern
+        match = log_pattern.match(line.strip())
+        if match:
+            ip, date, status_code, file_size = match.groups()
+            total_file_size += int(file_size)
 
-        # Count status codes if they are in the predefined set
-        if status_code in status_code_counts:
-            status_code_counts[status_code] += 1
+            # Count status codes if they are in the predefined set
+            if status_code in status_code_counts:
+                status_code_counts[status_code] += 1
 
-    # Print metrics every 10 lines
-    if line_count % 10 == 0:
-        print_metrics()
+        # Print metrics every 10 lines
+        if line_count % 10 == 0:
+            print_metrics()
 
-# After processing all lines, print the final metrics
-print_metrics()
+    # After processing all lines, print the final metrics
+    print_metrics()
+
+except KeyboardInterrupt:
+    sys.exit(0)
