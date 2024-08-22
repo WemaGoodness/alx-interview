@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Log parsing script that reads from stdin and computes metrics.
 - It outputs total file size and count of specific status codes every 10 lines.
