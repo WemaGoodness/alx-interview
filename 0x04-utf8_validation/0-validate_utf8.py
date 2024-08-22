@@ -29,7 +29,7 @@ def validUTF8(data):
             if (byte & mask1) == 0:
                 # 1-byte character
                 continue
-            
+
             # Determine the number of bytes in the UTF-8 character
             while (byte & mask1):
                 num_bytes += 1
