@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Module to calculate the minimum number of operations to get exactly `n`
 H characters in a text file
